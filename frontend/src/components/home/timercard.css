@@ -1,0 +1,35 @@
+.timer-card{
+    background-color: #4A49BE;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.fasting-type-display{
+    background-color: #ffffff5c;
+    color: #fff;
+    width: 60px;
+    height: 25px;
+    border-radius: 10px;
+}
+
+.timer-card-heading{
+    color: #fff;
+    opacity: 0.5;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.timer-text{
+    color: #fff;
+    opacity: 1;
+    font-size: 20px;
+}
+
+.timer-circle > div{
+    transform: rotate(180deg);
+}
+
+.timer-center-text{
+    transform: rotate(-180deg);
+}

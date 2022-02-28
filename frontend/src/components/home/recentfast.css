@@ -1,0 +1,19 @@
+.recent-fast-card > .card{
+    box-shadow: 0px 20px 100px -20px rgba(163, 163, 163, 0.25);
+    padding: 35px 50px;
+    border-radius: 32px;  
+    border: none;  
+}
+
+.recent-fast-title{
+    color: #A3A3A3;
+    font-size: 14px;
+    text-align: left;
+}
+
+.recent-fast-title1{
+    color: #000;
+    font-weight: 500;
+    text-align: left;
+    font-size: 18px;
+}
