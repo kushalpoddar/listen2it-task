@@ -121,7 +121,6 @@ class TimerCard extends React.Component{
     }
 
     submit(){
-        alert()
         // Sending to server
         addFastingData({ data : {
             started_at : this.state.started,
@@ -129,6 +128,7 @@ class TimerCard extends React.Component{
             type : this.state.current_fasting_type.id,
         }}).then(() => {
             alert("Fasting information saved")
+            this.handleModalClose()
         })
     }
 
