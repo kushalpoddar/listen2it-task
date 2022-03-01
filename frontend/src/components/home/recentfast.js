@@ -67,8 +67,9 @@ class RecentFast extends React.Component{
           };
 
         const averageFastingTime = () => {
+
             const duration_arr = this.state.data.map(row => row.duration)
-            return duration_arr.reduce((a,b) => a + b, 0)/duration_arr.length
+            return duration_arr.length ? duration_arr.reduce((a,b) => a + b, 0)/duration_arr.length : 0
         }
         return (
             <div className="recent-fast-card">

@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const history = require("connect-history-api-fallback")
+const path = require('path')
 const app = express()
 const config = require('config')
 app.use(express.json())
@@ -21,11 +23,11 @@ app.use('/api/auth', auth_route)
 app.use('/api/fasting', fasting_route)
 
 // // 1st call for unredirected requests 
-// app.use(express.static(path.join(__dirname + '/build')))
-// // Support history api 
-// app.use(history());
-// // 2nd call for redirected requests
-// app.use(express.static(path.join(__dirname + '/build')))
+app.use(express.static(path.join(__dirname + '/build')))
+// Support history api 
+app.use(history());
+// 2nd call for redirected requests
+app.use(express.static(path.join(__dirname + '/build')))
 
 app.get('/', (req, res) => {
 	res.send("HIII")

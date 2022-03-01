@@ -6,6 +6,7 @@ const {
     getFastingData, 
     createFastingData,  
 } = require('../controller/fasting')
+const auth = require('../middleware/auth')
 
 //Get all fasting data
 router.get('/', async(req, res) => {
@@ -20,8 +21,8 @@ router.get('/types', async(req, res) => {
 })
 
 //Summary
-router.get('/summary', async(req, res) => {
-    let fasting_data = await getFastingData()
+router.get('/summary', auth, async(req, res) => {
+    let fasting_data = await getFastingData({user : req.user_token_details})
     fasting_data = fasting_data.map(fd => {
         return {
             ...fd, duration : dayjs(fd.ended_at).diff(dayjs(fd.started_at))/1000
@@ -60,10 +61,10 @@ router.get('/summary', async(req, res) => {
         value : fasting_data.length
     },{
         title : "7-fast avg",
-        value : `${Math.round(((seven_day.reduce((a,b) => a + b, 0) / seven_day.length)/3600)*10)/10}h`
+        value : seven_day.length ? `${Math.round(((seven_day.reduce((a,b) => a + b, 0) / seven_day.length)/3600)*10)/10}h` : "0h"
     },{
         title : "Longest Fast",
-        value : `${Math.round(((Math.max(...fasting_data.map(fd => fd.duration)))/3600)*10)/10}h`
+        value : fasting_data.length ? `${Math.round(((Math.max(...fasting_data.map(fd => fd.duration)))/3600)*10)/10}h` : "0h"
     },{
         title : "Longest Streak",
         value : Math.max(...streaks.map(fd => fd.days))
@@ -75,8 +76,8 @@ router.get('/summary', async(req, res) => {
 })
 
 //Recent Fasts
-router.get('/recent', async(req, res) => {
-    let fasting_data = await getFastingData()
+router.get('/recent', auth, async(req, res) => {
+    let fasting_data = await getFastingData({user : req.user_token_details})
     fasting_data = fasting_data.map(fd => {
         return {
             ...fd, duration : Math.round((dayjs(fd.ended_at).diff(dayjs(fd.started_at))/(1000*3600))*10)/10
@@ -84,13 +85,12 @@ router.get('/recent', async(req, res) => {
     })
 
     const seven_day = fasting_data.slice(0, 7)
-    
 	return res.send(seven_day)
 })
 
 //Insert fasting data
-router.post('/', async(req, res) => {
-    const fasting_data = await createFastingData({ data : req.body })
+router.post('/', auth, async(req, res) => {
+    const fasting_data = await createFastingData({ data : req.body, user : req.user_token_details })
 	return res.send(fasting_data)
 })
 

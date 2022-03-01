@@ -1,6 +1,7 @@
 import React from "react"
 import dayjs from "dayjs"
-import {Row, Col} from "react-bootstrap"
+import DateTimePicker from 'react-datetime-picker';
+import {Row, Col, Modal, Button} from "react-bootstrap"
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import "./timercard.css"
 import pencilEditIcon from "../../assets/img/pencil.svg"
@@ -27,6 +28,7 @@ class TimerCard extends React.Component{
     constructor(){
         super()
         this.state = {
+            modal_active : false,
             started : null,
             ended : null,
             is_fasting_type_editing : true,
@@ -40,6 +42,10 @@ class TimerCard extends React.Component{
         this.editFastingType = this.editFastingType.bind(this)
         this.handleFastingTypeChange = this.handleFastingTypeChange.bind(this)
         this.getFastDuration = this.getFastDuration.bind(this)
+        this.handleModalClose = this.handleModalClose.bind(this)
+        this.handleModalOpen = this.handleModalOpen.bind(this)
+        this.submit = this.submit.bind(this)
+        this.changeEnded = this.changeEnded.bind(this)
     }
 
     componentDidMount(){
@@ -53,6 +59,16 @@ class TimerCard extends React.Component{
         })
     }
 
+    handleModalClose(){
+        this.setState(prevState => {
+            return {...prevState, modal_active : false}
+        })
+    }
+    handleModalOpen(){
+        this.setState(prevState => {
+            return {...prevState, modal_active : true}
+        })
+    }
     editFastingType(){
         this.setState(prevState => {
             return {
@@ -99,12 +115,21 @@ class TimerCard extends React.Component{
             }
         })
 
+        this.handleModalOpen()
+
+        
+    }
+
+    submit(){
+        alert()
         // Sending to server
         addFastingData({ data : {
             started_at : this.state.started,
-            ended_at : ended,
+            ended_at : this.state.ended,
             type : this.state.current_fasting_type.id,
-        }})
+        }}).then(() => {
+            alert("Fasting information saved")
+        })
     }
 
     getFastDuration(){
@@ -113,9 +138,26 @@ class TimerCard extends React.Component{
         }
         return 0
     }
+
+    changeEnded(value){
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                ended : new Date(value)
+            }
+        })
+    }
     render(){
         return (
             <div className="timer-card">
+
+                <Modal show={this.state.modal_active} onHide={this.handleModalClose}>
+                    <Modal.Body>
+                        <p className="input-label">Any custom end time?</p>
+                        <DateTimePicker onChange={this.changeEnded} value={new Date(this.state.ended)} />
+                        <p><button onClick={() => this.submit()} className="my-btn">Proceed</button></p>
+                    </Modal.Body>
+                </Modal>
                 <div className="row">
                     <div className="col justify-content-center d-flex">
                         <div className="fasting-type-display">

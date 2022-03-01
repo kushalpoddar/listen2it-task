@@ -41,9 +41,8 @@
 }
 
 .pencil-edit-icon{
-  top: -2px;
   position: relative;
-  margin-left: 5px;
+  right: -3px;
 }
 
 .login-card > .card{

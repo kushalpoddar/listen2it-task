@@ -13,10 +13,10 @@ const getFastingTypes = () => {
     })
 }
 
-const getFastingData = () => {
-    const query = "SELECT * FROM fasting ORDER BY started_at DESC"
+const getFastingData = ({user}) => {
+    const query = "SELECT * FROM fasting WHERE user = ? ORDER BY started_at DESC"
     return new Promise((resolve, reject) => {
-        conn.query(query, (err, data) => {
+        conn.query(query, [user.id], (err, data) => {
             if(err){
                 console.error(err)
                 return reject(err)
@@ -40,10 +40,10 @@ const getFastingDetails = (id) => {
     })
 }
 
-const createFastingData = ({data}) => {
-    const query = "INSERT INTO fasting(type, started_at, ended_at) value(?, ?, ?)"
+const createFastingData = ({data, user}) => {
+    const query = "INSERT INTO fasting(type, started_at, ended_at, user) value(?, ?, ?, ?)"
     return new Promise((resolve, reject) => {
-        conn.query(query, [data.type, data.started_at, data.ended_at], async(err, data) => {
+        conn.query(query, [data.type, data.started_at, data.ended_at, user.id], async(err, data) => {
             if(err){
                 console.error(err)
                 return reject(err)
