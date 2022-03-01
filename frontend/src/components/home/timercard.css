@@ -18,6 +18,13 @@
     font-weight: bold;
     font-size: 12px;
     line-height: 14px;
+    text-align: left;
+}
+.timer-card-value{
+    color: #fff;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: left;
 }
 
 .timer-text{
@@ -32,4 +39,15 @@
 
 .timer-center-text{
     transform: rotate(-180deg);
+}
+
+.my-btn{
+    border-radius: 20px;
+    background: #F2B3A1;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    color: #232370;
+    padding: 3px 10px;
 }

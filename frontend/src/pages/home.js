@@ -6,7 +6,7 @@ class Home extends React.Component{
     render(){
         return (
             <div className="container">
-                <div className="row">
+                <div className="row mb-4 d-flex align-items-center">
                     <div className="col-4">
                         <TimerCard />
                     </div>

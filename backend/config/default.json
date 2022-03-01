@@ -1,0 +1,22 @@
+{
+        "type" : "D", //D - Development, P - Production
+        "AUTH_SCRET_KEY" : "KP",
+        "files" : {
+                "basepath" : "http://localhost:3498/",
+                "path" : "http://localhost:3498/uploads/",
+                // "basepath" : "http://81.4.100.184:3498/",
+                // "path" : "http://81.4.100.184:3498/uploads/",
+                "avatar" : "avatar/",
+        },
+        "db" : {
+                "host_dev" : "localhost",
+                "user_dev" : "root",
+                "password_dev" : "",
+                "db_dev" : "listen2it",
+                "host_prod" : "docker-listen2it-mysql",
+                "user_prod" : "root",
+                "password_prod" : "listen2it",
+                "db_prod" : "listen2it",
+                "port_prod" : "3306"
+        },
+}

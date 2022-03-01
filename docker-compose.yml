@@ -1,0 +1,26 @@
+version: '3'
+services:
+ # server configuration   
+  web:
+    container_name: docker-listen2it-backend
+    restart: always
+    build: ./backend
+    image: listen2it-main
+    ports:
+      - "7521:7521"
+    depends_on:
+      - docker-listen2it-mysql
+
+ # Mysql configuration
+  docker-listen2it-mysql:
+    image: mysql:5.7
+    container_name: docker-listen2it-mysql
+    restart: always
+    command: --sql_mode=''
+    environment:
+        - MYSQL_DATABASE=listen2it
+        - MYSQL_ROOT_PASSWORD=listen2it
+    ports:
+        - "3370:3306"
+    volumes:
+        - ./dbdata1:/var/lib/mysql

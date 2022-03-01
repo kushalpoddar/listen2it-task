@@ -18,9 +18,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route element={<PublicRoute component={Home}/>} path="/home"></Route>
-          <Route element={<PrivateRoute component={Login}/>} path="/login"></Route>
-          <Route element={<PrivateRoute component={Register}/>} path="/register"></Route>
+          <Route element={<PrivateRoute component={Home}/>} path="/home"></Route>
+          <Route element={<PublicRoute component={Login}/>} path="/login"></Route>
+          <Route element={<PublicRoute component={Register}/>} path="/register"></Route>
         </Routes>
       </BrowserRouter>
     </div>

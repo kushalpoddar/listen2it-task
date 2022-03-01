@@ -3,9 +3,8 @@ import React from "react";
 import { Route, Navigate } from "react-router-dom";
 
 const PublicRoute = ({ component: Component, restricted, ...rest }) => {
-//   const { user: currentUser } = useSelector((state) => state.auth);
-    let currentUser = false
-    // return <Navigate to="/home" />
+    const currentUser = localStorage.getItem("token")
+    if(currentUser) return <Navigate to="/home" />
     return (
         <Component />
     );

@@ -1,28 +1,21 @@
 import React from "react"
 import {Row, Col, Card} from "react-bootstrap"
 import "./fastsummary.css"
+// Services
+import {getFastingSummary} from "../../services/fasting"
 
 class RecentFast extends React.Component{
     constructor(){
         super()
         this.state = {
-            summary : [{
-                title : "Total Fasts",
-                value : "14"
-            },{
-                title : "7-fast avg",
-                value : "16h"
-            },{
-                title : "Longest Fast",
-                value : "18.1h"
-            },{
-                title : "Longest Streak",
-                value : "14"
-            },{
-                title : "Current Streak",
-                value : "14"
-            }]
+            summary : []
         }
+    }
+
+    componentDidMount(){
+        getFastingSummary().then(res => {
+            this.setState(prevState => { return { ...prevState, summary : res.data }})
+        })
     }
 
     render(){
