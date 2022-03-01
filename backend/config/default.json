@@ -1,5 +1,5 @@
 {
-        "type" : "D", //D - Development, P - Production
+        "type" : "P", //D - Development, P - Production
         "AUTH_SCRET_KEY" : "KP",
         "files" : {
                 "basepath" : "http://localhost:3498/",
